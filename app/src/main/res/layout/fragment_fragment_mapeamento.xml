@@ -1,0 +1,29 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FragmentMapeamento">
+
+    <!-- TODO: Update blank fragment layout -->
+    <!--
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    map:cameraBearing="112.5"
+    map:cameraTargetLat="-30.1412498"
+    map:cameraTargetLng="-51.1298999"
+    map:cameraTilt="30"
+    map:cameraZoom="13"
+    map:mapType="normal"
+    map:uiCompass="false"
+    map:uiRotateGestures="true"
+    map:uiScrollGestures="false"
+    map:uiTiltGestures="true"
+    map:uiZoomControls="false"
+    map:uiZoomGestures="true"
+    tools:ignore="MissingPrefix" -->
+    <fragment
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:id="@+id/map"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</FrameLayout>
