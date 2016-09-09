@@ -42,6 +42,7 @@ public class Principal extends AppCompatActivity {
         adaptadorDePaginas.addPaginas(new FragmentPagina1(),"Primeira");
         adaptadorDePaginas.addPaginas(new FragmentPagina2(),"Segunda");
         adaptadorDePaginas.addPaginas(new FragmentMapeamento(),"Mapeamento");
+        adaptadorDePaginas.addPaginas(new Apontamentos(),"Apontamentos");
         //adaptadorDePaginas.addPaginas(new Teste(),"test");
         paginaDasAbas.setAdapter(adaptadorDePaginas);
         abas.setupWithViewPager(paginaDasAbas);
