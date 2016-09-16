@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">Casual</string>
-    <string name="action_settings">Settings</string>
+    <string name="acao_atualizar">Atualizar</string>
+    <string name="acao_configurar">Configurar</string>
+    <string name="acao_sair">Sair</string>
     <string-array name="titulo_abas">
         <item>Primeira</item>
         <item>Segunda</item>
