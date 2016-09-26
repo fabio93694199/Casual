@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "380260557521",
+    "firebase_url": "https://casual-e8a19.firebaseio.com",
+    "project_id": "casual-e8a19",
+    "storage_bucket": "casual-e8a19.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:380260557521:android:2f192f8cc2d6ec56",
+        "android_client_info": {
+          "package_name": "com.example.ti.casual"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "380260557521-casscopuq6ob4s4q0vaajmu454iv62h2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnGXg7fZmQGNhaezW1qtItr5eqq9eyUys"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

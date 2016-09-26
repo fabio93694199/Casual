@@ -12,7 +12,10 @@ import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.TextView;
 
+import com.firebase.client.Firebase;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -22,11 +25,16 @@ public class Principal extends AppCompatActivity {
     TabLayout abas;
     ViewPager paginaDasAbas;
     AdaptadorDePaginas adaptadorDePaginas;
+    //////////////////////////////////////
+    //Firebase referenciaFirebase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
+        //////////////////////////////////////////////////////////////////
+
+        //////////////////////////////////////////////////////////////////
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -53,6 +61,30 @@ public class Principal extends AppCompatActivity {
         paginaDasAbas.setAdapter(adaptadorDePaginas);
         abas.setupWithViewPager(paginaDasAbas);
         /////////////////////////////// LOCALIZAÇÃO //////////////////////////////////
+
+        ////////////////////////////////// TESTE /////////////////////////////////////
+        //Firebase.setAndroidContext(this);
+        //referenciaFirebase = new Firebase("https://casual-e8a19.firebaseio.com/");
+        //
+        /*
+        texto = (TextView) findViewById(R.id.apresenta);
+        botao1= (Button) findViewById(R.id.botao1);
+        botao2= (Button) findViewById(R.id.botao2);
+        //
+        botao1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                texto.setText("Vermelho");
+            }
+        });
+        botao2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                texto.setText("Verde");
+            }
+        });
+        */
+
     }
     ///////////////////////////// MENU "PEQUENO" LATERAL /////////////////////////////
     @Override
@@ -82,5 +114,10 @@ public class Principal extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+/*
+    @Override
+    public void Botoes() {
 
+    }
+*/
 }

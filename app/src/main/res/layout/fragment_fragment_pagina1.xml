@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,7 +7,32 @@
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="37dp"
+        android:id="@+id/apresenta"
+        android:hint="palavra vai aparecer"
+        android:textSize="18sp"
+        android:gravity="center" />
 
-</FrameLayout>
+    <Button
+        android:text="Vermelho"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/botao1"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/minhaCorVermelha" />
+
+    <Button
+        android:text="Verde"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/botao2"
+        android:layout_alignBottom="@+id/botao1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="58dp"
+        android:background="@color/minhaCor" />
+
+</RelativeLayout>
