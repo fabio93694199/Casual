@@ -1,27 +1,35 @@
 {
   "project_info": {
-    "project_number": "380260557521",
-    "firebase_url": "https://casual-e8a19.firebaseio.com",
-    "project_id": "casual-e8a19",
-    "storage_bucket": "casual-e8a19.appspot.com"
+    "project_number": "926541070106",
+    "firebase_url": "https://casual-2aaf0.firebaseio.com",
+    "project_id": "casual-2aaf0",
+    "storage_bucket": "casual-2aaf0.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:380260557521:android:2f192f8cc2d6ec56",
+        "mobilesdk_app_id": "1:926541070106:android:391df96366a54e31",
         "android_client_info": {
-          "package_name": "com.example.ti.casual"
+          "package_name": "com.example.ti.novocasual"
         }
       },
       "oauth_client": [
         {
-          "client_id": "380260557521-casscopuq6ob4s4q0vaajmu454iv62h2.apps.googleusercontent.com",
+          "client_id": "926541070106-0lqb9km0mngsvg2h8p01c7dqdeqt7nm1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ti.novocasual",
+            "certificate_hash": "54F052CD63A530531BBC58892A326B27FAE7C9BA"
+          }
+        },
+        {
+          "client_id": "926541070106-8e7on5a9h0e5tq5r8mq1c4v037rlklj4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCnGXg7fZmQGNhaezW1qtItr5eqq9eyUys"
+          "current_key": "AIzaSyDgu44_CmKAvpmbZYVa_975jQW3bQ2tRFk"
         }
       ],
       "services": {
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "926541070106-8e7on5a9h0e5tq5r8mq1c4v037rlklj4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2

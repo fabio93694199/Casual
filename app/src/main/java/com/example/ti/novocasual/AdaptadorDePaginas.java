@@ -1,4 +1,4 @@
-package com.example.ti.casual;
+package com.example.ti.novocasual;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -6,9 +6,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import java.util.ArrayList;
 
-/**
- * Created by ti on 26/08/16.
- */
+
 public class AdaptadorDePaginas extends FragmentStatePagerAdapter {
 
     ArrayList<Fragment> paginas = new ArrayList<>();

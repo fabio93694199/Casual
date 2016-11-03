@@ -1,15 +1,35 @@
 <resources>
-    <string name="app_name">Casual</string>
+    <string name="app_name">NovoCasual</string>
+    <string name="botao_registrar">Registrar</string>
+    <string name="email">Email</string>
+    <string name="minimum_password">Senha muito curta, minimo 6 caracteres!</string>
+    <string name="auth_failed">Autenticação falhou, verifique seu email e senha ou registre-se</string>
+    <string name="change_email">Alterar Email</string>
+    <string name="change_password">Alterar Senha</string>
+    <string name="send_password_reset_email">Enviar email de redefinição de senha</string>
+    <string name="remove_user">Remover Usuário</string>
+    <string name="new_pass">Nova Senha</string>
+    <string name="title_activity_profile">Firebase</string>
+    <string name="title_activity_login">Entrar</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_senha">Senha</string>
+    <string name="hint_name">Nome completo</string>
+    <string name="botao_entrar">Entrar</string>
+    <string name="botao_link_para_registrase">Não é um membro? Se registre no Casual agora!</string>
+    <string name="botao_link_para_login">Já sou registrado. Logar-me!</string>
+    <string name="title_activity_reset_password">ActivityResetSenha</string>
+    <string name="botao_esquecer_senha">Esqueceu sua senha?</string>
+    <string name="botao_redefinir_senha">Redefinir Senha</string>
+    <string name="botao_voltar"><![CDATA[<< Voltar]]></string>
+    <string name="hint_new_email">Novo Email</string>
+    <string name="btn_change">Alterar</string>
+    <string name="btn_send">Enviar</string>
+    <string name="btn_remove">Remover</string>
+    <string name="btn_sign_out">Sair</string>
+    <string name="texto_esqueceu_senha">Esqueceu a Senha?</string>
+    <string name="msg_esqueceu_senha">Nós só precisamos do seu email cadastrado para lhe enviar instruções de redefinição de senha.</string>
+    <string name="title_activity_cadastro">Cadastro</string>
     <string name="acao_atualizar">Atualizar</string>
     <string name="acao_configurar">Configurar</string>
     <string name="acao_sair">Sair</string>
-    <string-array name="titulo_abas">
-        <item>Primeira</item>
-        <item>Segunda</item>
-        <item>Terceira</item>
-    </string-array>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_apontamentos">Map</string>
 </resources>
