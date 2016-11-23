@@ -1,15 +1,15 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
     android:id="@+id/ID_fragment_pagina1"
+    android:padding="3dip"
     tools:context="com.example.ti.novocasual.Pagina1">
 
-    <ListView
-        android:id="@+id/IDlistadepessoasEncontradas"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/ID_recyclerView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="vertical"/>
 
 </FrameLayout>

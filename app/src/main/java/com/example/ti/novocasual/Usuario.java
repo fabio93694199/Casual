@@ -16,8 +16,21 @@ public class Usuario {
     private String lat;
     private String lng;
     private String online;
+    private String genero;
+    private String pais;
+    private String estado;
 
     public Usuario(){}
+
+    public Usuario(String i,String n,String e,String s,String la,String ln,String o){
+        id=i;
+        nome=n;
+        email=e;
+        senha=s;
+        lat=la;
+        lng=ln;
+        online=o;
+    }
 
 
     public String getId() {
@@ -75,6 +88,32 @@ public class Usuario {
     public void setOnline(String online) {
         this.online = online;
     }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    public String getPais() {
+        return pais;
+    }
+
+    public void setPais(String pais) {
+        this.pais = pais;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+
     /*
         public void gerarCryptSenha(){
             senha = CryptWithMD5.cryptWithMD5(senha);

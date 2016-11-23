@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -14,9 +15,12 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,26 +29,29 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Apontamentos extends SupportMapFragment implements OnMapReadyCallback {
 
+    private FirebaseAuth auth;
+    String testID;
+
+
     private GoogleMap mMap;
     private DatabaseReference databaseReference,banco,banco1;
-    private ArrayList<Usuario> lstUsuario = new ArrayList<Usuario>();
-    private ArrayList minhaListaTest;
-    //private ArrayList<Usuario> lstUsuario = new ArrayList<>();
-    //private ArrayList<Double> lstUsuario = new ArrayList<>();
-    private String test1;
-    private String conteudo;
-
+    private ArrayList<Usuario> lstUsuario = new ArrayList<>();
+    private ArrayList<Marker> mMarcadores = new ArrayList<Marker>();
+    private Long DataTempo = new Date().getTime();
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //lstUsuario = ;
-
-
-
+        auth = FirebaseAuth.getInstance();
+        testID = auth.getCurrentUser().getUid().toString();
+        //String ttt1 = auth.getCurrentUser().
 
         getMapAsync(this);
     }
@@ -74,6 +81,9 @@ public class Apontamentos extends SupportMapFragment implements OnMapReadyCallba
 
     protected class Localizar implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
         private GoogleApiClient m_api;
+        String res;
+        int cont = 0;
+        final ScheduledExecutorService executorServico = Executors.newSingleThreadScheduledExecutor();
 
         public Localizar(){
             super();
@@ -91,14 +101,15 @@ public class Apontamentos extends SupportMapFragment implements OnMapReadyCallba
         @Override
         public void onConnected(Bundle bundle){
 
-            databaseReference = FirebaseDatabase.getInstance().getReference();
-            banco = databaseReference.child("brasil").child("RioGrandeDoSul");
+            final LatLng latLng = location();
 
-            banco.addChildEventListener(new ChildEventListener() {
+            databaseReference = FirebaseDatabase.getInstance().getReference();
+            //final String res = databaseReference.orderByKey().startAt("Rio Grande do Sul").toString();
+
+            databaseReference.orderByKey().startAt("FEjEmWKeILbyxvup2Gtt5uCgH2x1").addChildEventListener(new ChildEventListener() {
                 @Override
                 public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                    Usuario use = dataSnapshot.getValue(Usuario.class);
-                    mMap.addMarker(new MarkerOptions().position(new LatLng(0.0,0.0)).title("Eu").snippet(use.getEmail()));
+                    res = dataSnapshot.toString();
                 }
 
                 @Override
@@ -123,31 +134,92 @@ public class Apontamentos extends SupportMapFragment implements OnMapReadyCallba
             });
 
 
-            /*
-            LatLng latLng = location();
+            banco = databaseReference.child("Brasil").child("Rio Grande do Sul");
+            //res = databaseReference.orderByKey().startAt("Rio Grande do Sul").toString();
+            banco.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
 
-            mMap.addMarker(new MarkerOptions().position(latLng).title("Eu").snippet("29 anos"));
-            mMap.animateCamera(cameraPosition(latLng,15,0,0));
-            m_api.disconnect();
-            */
-            LatLng latLng = location();
+                    if (dataSnapshot.getChildrenCount()==0){
+                        //se tá vazio o banco sai do método de busca
+                    }else{
+                        //para cada usuario no banco, cria um objeto e add numa lista...
+                        for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
 
-            //mMap.addMarker(new MarkerOptions().position(latLng).title("Eu").snippet(lstUsuario.get(1).getEmail().toString()));
-            //mMap.addMarker(new MarkerOptions().position(latLng).title("Eu").snippet(Integer.toString(lstUsuario.size())));
+                            Usuario use = postSnapshot.getValue(Usuario.class);
+                            lstUsuario.add(use);
+                            cont+=1;
+                        }
+                    }
+                    // somente após os dados chegarem de fato...
+                    for (int i=0; i< lstUsuario.size(); i++){
 
+                        Double lt = Double.parseDouble(lstUsuario.get(i).getLat());
+                        Double lg = Double.parseDouble(lstUsuario.get(i).getLng());
 
-//            mMap.addMarker(new MarkerOptions().position(latLng).title("Eu").snippet("test"));
+                        if(lstUsuario.get(i).getGenero().equals("Indefinido")) {
+                            Marker marker = mMap.addMarker(new MarkerOptions().position(new LatLng(lt, lg)));
+                            marker.setTitle(lstUsuario.get(i).getNome());
+                            marker.setSnippet(res);
+                            marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.indefinido));
+                            //mMap.addMarker(new MarkerOptions().position(new LatLng(lt,lg)).title(Integer.toString(lstUsuario.size())).snippet(Integer.toString(cont)));
+                            mMarcadores.add(marker);
+                        }
+                        if(lstUsuario.get(i).getGenero().equals("Feminino")) {
+                            Marker marker = mMap.addMarker(new MarkerOptions().position(new LatLng(lt, lg)));
+                            marker.setTitle(lstUsuario.get(i).getNome());
+                            marker.setSnippet(res);
+                            marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.feminino));
+                            //mMap.addMarker(new MarkerOptions().position(new LatLng(lt,lg)).title(Integer.toString(lstUsuario.size())).snippet(Integer.toString(cont)));
+                            mMarcadores.add(marker);
+                        }
+                        if(lstUsuario.get(i).getGenero().equals("Masculino")) {
+                            Marker marker = mMap.addMarker(new MarkerOptions().position(new LatLng(lt, lg)));
+                            marker.setTitle(lstUsuario.get(i).getNome());
+                            marker.setSnippet(res);
+                            marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.masculino));
+                            //mMap.addMarker(new MarkerOptions().position(new LatLng(lt,lg)).title(Integer.toString(lstUsuario.size())).snippet(Integer.toString(cont)));
+                            mMarcadores.add(marker);
+                        }
+                    }
+/*
+                    executorServico.scheduleAtFixedRate(new Runnable() {
+                        @Override
+                        public void run() {
+                            //atualizar();
+                            for (Marker marker: mMarcadores){
+                                marker.remove();
+                            }
+                            mMarcadores.clear();
+                        }
+                    }, 0, 3, TimeUnit.SECONDS);
+*/
+                    //atualizar();
+/*
+                    for (Marker marker: mMarcadores){
+                        marker.remove();
+                    }
+                    mMarcadores.clear();
+*/
+/*
+                    int test1 = Integer.parseInt(DataTempo.toString());
+                    while ((test1/1000)%11==0){
+                        for (Marker marker: mMarcadores){
+                            marker.remove();
+                        }
+                        mMarcadores.clear();
+                    }
+                    */
+                }
 
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
 
-            //for (int i= 0; i<lstUsuario.size();i++) {
-            //    mMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(lstUsuario.get(i).getLat()),Double.parseDouble(lstUsuario.get(i).getLng()))).title(lstUsuario.get(i).getNome().toString()).snippet(lstUsuario.get(i).getEmail().toString()));
-            //    //mMap.animateCamera(cameraPosition(latLng, 15, 0, 0));
-            //}
+                }
+            });
+
             mMap.animateCamera(cameraPosition(latLng, 15, 0, 0));
             m_api.disconnect();
-
-            //String test2= String.valueOf(test1);
-            //Toast.makeText(getContext(),test2,Toast.LENGTH_LONG);
         }
 
         @Override
@@ -172,6 +244,20 @@ public class Apontamentos extends SupportMapFragment implements OnMapReadyCallba
             return CameraUpdateFactory.newCameraPosition(position);
         }
 
+        public void atualizar(){
+
+            for (int i=0; i< lstUsuario.size(); i++){
+
+                Double lt = Double.parseDouble(lstUsuario.get(i).getLat());
+                Double lg = Double.parseDouble(lstUsuario.get(i).getLng());
+
+                mMap.addMarker(new MarkerOptions().position(new LatLng(lt,lg))).remove();
+                //mMap.addMarker(new MarkerOptions().position(new LatLng(lt,lg)).title(Integer.toString(lstUsuario.size())).snippet(Integer.toString(cont)));
+
+            }
+            lstUsuario.clear();
+        }
+
         public LatLng location(){
             Location loc = LocationServices.FusedLocationApi.getLastLocation(m_api);
 
@@ -182,3 +268,5 @@ public class Apontamentos extends SupportMapFragment implements OnMapReadyCallba
     } // Fim da Classe Localizar
     /////////////////////////////////////////////////////////////////////////////////
 } // Fim da Classe Apontamento
+
+
